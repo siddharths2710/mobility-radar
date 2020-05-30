@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html class="gr__leafletjs_com"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	
+	<title>Mobility Radar Regions</title>
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<link rel="shortcut icon" type="image/x-icon" href="https://leafletjs.com/examples/custom-icons/docs/images/favicon.ico" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.6.0/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.6.0/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin="anonymous"></script>
+
+
+	<style>
+		html, body {
+			height: 100%;
+			margin: 0;
+		}
+		#map {
+			width: 100%;
+			height: 100%;
+		}
+
+			.legend {
+		  padding: 6px 8px;
+		  font: 14px Arial, Helvetica, sans-serif;
+		  background: white;
+		  background: rgba(255, 255, 255, 0.8);
+		  line-height: 24px;
+		  color: #555;
+		}
+		.legend h4 {
+		  text-align: center;
+		  font-size: 16px;
+		  margin: 2px 12px 8px;
+		  color: #777;
+		}
+
+		.legend span {
+		  position: relative;
+		  bottom: 3px;
+		}
+
+		.legend i {
+		  width: 18px;
+		  height: 18px;
+		  float: left;
+		  margin: 0 8px 0 0;
+		  opacity: 0.7;
+		}
+
+		.legend i.icon {
+		  background-size: 18px;
+		  background-color: rgba(255, 255, 255, 1);
+		}
+	</style>
+
+
+	
+</head>
+<body data-gr-c-s-loaded="true">
+
+<div id="map" class="leaflet-container leaflet-touch leaflet-fade-anim leaflet-grab leaflet-touch-drag leaflet-touch-zoom" style="position: relative;" tabindex="0"><div class="leaflet-pane leaflet-tooltip-pane"></div><div class="leaflet-pane leaflet-popup-pane"></div></div><div class="leaflet-control-container"><div class="leaflet-top leaflet-right"></div><div class="leaflet-bottom leaflet-left"></div><div class="leaflet-bottom leaflet-right"></div></div></div>
+{% block container %}
+<script>
+	var map = L.map('map').setView([12.9633875,77.5972155], 10);
+
+	L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+		attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+	}).addTo(map);
+
+	var legend = L.control({ position: "bottomleft" });
+	{% for region in data['regions'] %}
+
+	var circle = L.circle([{{ region[ "latitude" ] }}, {{ region[ "longitude" ] }} ], {
+          color: "{{ region['color'] }}",
+          fillColor: "{{ region['color'] }}",
+          fillOpacity: 0.4,
+          radius: {{ region['radius'] }}
+      }).addTo(map);
+	
+	{% endfor %}
+
+	legend.onAdd = function(map){
+		var div = L.DomUtil.create("div", "legend");
+		div.innerHTML += "<h4>Services</h4>";
+		
+		{% for service in data['ccodes'] %}
+		div.innerHTML += "<i style=\"background: {{ data['ccodes'][ service ] }}\"></i><span>{{ service }}</span><br>";
+		{% endfor %}
+		return div;
+	};
+
+	legend.addTo(map);
+
+</script>
+{% endblock %}
+</body></html>
