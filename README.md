@@ -21,3 +21,4 @@ It has been noticed that standard queries took quite a long time ( close to a mi
  - You should see the landing page. You may choose to either find services in your area ( Grant **location** permission ) or you can choose to view the existing regions that are stored in the Cosmos DB collection.
  - To provide ease of convenience in adding a newly available service vantage point into Cosmos DB, a helper script is provided to achieve the same: `python helper_write_data_model_cosmos.py`
  - Once an update is done in Cosmos, the Blob File must be updated as well for the App service to read the same: `python helper_gen_pickle_frm_cosmos.py`
+ - Deploy the web app using Azure CLI: `az webapp up -n <webapp-name> --sku <tier>`, or through a CI workflow using [GitHub Actions](https://github.com/Azure/webapps-deploy)
