@@ -4,7 +4,7 @@ This repository provides the source files to run the mobility-radar solution, wi
 
 ## Use Case Diagram
 
-[Imgur](https://i.imgur.com/FfHcjle.png)
+![https://www.hackerearth.com/challenges/hackathon/microsoft-azure-java-hackathon/](https://i.imgur.com/FfHcjle.png)
 ----------------------
 
 It has been noticed that standard queries took quite a long time ( close to a minute to be precise ) when the App service was made to read the vantage points directly from Cosmos DB. For the sake of the prototype, a Blob file is being used instead since it stores a **K-D Tree** which can efficiently retrieve the nearest neighbours for the current location in a matter of seconds.
