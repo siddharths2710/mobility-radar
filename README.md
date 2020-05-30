@@ -4,28 +4,7 @@ This repository provides the source files to run the mobility-radar solution, wi
 
 ## Use Case Diagram
 
-
-```mermaid
-sequenceDiagram
-participant User
-participant App Service
-participant BlobContainer
-participant Cosmos DB
-participant Azure Admin
-Azure Admin ->> Cosmos DB: Add new Vantage Point
- Note right of Azure Admin: Format: <br/><br/>{<br/>"latitude": string,<br/>"longitude": string,<br/>"service": string<br/>}
-Cosmos DB -->> BlobContainer: Update data
-loop UpdateBlob
-BlobContainer -->> BlobContainer: Update Meta & Tree for each service
-end
-BlobContainer -->> App Service: Read Updated Blob
-User ->> App Service: Send Current Location
-loop ProcessLocation
-App Service -->> App Service: Query tree for nearest regions
-end
-App Service -->> User: Return closest services
-```
-
+[Imgur](https://i.imgur.com/FfHcjle.png)
 ----------------------
 
 It has been noticed that standard queries took quite a long time ( close to a minute to be precise ) when the App service was made to read the vantage points directly from Cosmos DB. For the sake of the prototype, a Blob file is being used instead since it stores a **K-D Tree** which can efficiently retrieve the nearest neighbours for the current location in a matter of seconds.
