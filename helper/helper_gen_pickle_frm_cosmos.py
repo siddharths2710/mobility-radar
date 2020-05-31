@@ -39,7 +39,7 @@ if __name__ == "__main__":
 
 	vantage_pts = {}
 	region_list = {}
-	client = pymongo.MongoClient("mongodb://mobility-vantage-pt-region:dW9VlngM8nxNiSdXy39KyUzkzuYFXYz9pMGkwLdzpSeZKm92PPkkZcdY83kBqUsb7g9robY4uXyP8Vs0EjPmqQ==@mobility-vantage-pt-region.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&maxIdleTimeMS=120000&appName=@mobility-vantage-pt-region@")
+	client = pymongo.MongoClient("my_mongo_client")
 	db = client.mobility_radar
 	for entry in db.regions.find():
 		service = entry['service']
@@ -55,5 +55,5 @@ if __name__ == "__main__":
 		vantage_pts[ service ][ 'img_url' ] = meta['img_url'][ service ]
 
 
-	blob_client = azure.storage.blob.BlobClient.from_connection_string(conn_str="DefaultEndpointsProtocol=https;AccountName=mobilityhack;AccountKey=TBq6mUKB1uT7SIBWxSbgSUPLKPjdlddLeNI/oLQRqHuEbdpRwXrV5IYbn+CFpOC65Dj67C8iRNwgSfU7ej6B5w==;EndpointSuffix=core.windows.net", container_name="vantage-pts-container", blob_name="vantage_pts_blob.pickle")
+	blob_client = azure.storage.blob.BlobClient.from_connection_string(conn_str="my_conn_str", container_name="vantage-pts-container", blob_name="vantage_pts_blob.pickle")
 	blob_client.upload_blob(pickle.dumps( vantage_pts ) , overwrite = True )

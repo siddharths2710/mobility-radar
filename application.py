@@ -28,7 +28,7 @@ ccodes = { "bounce": "#eb3b3b", "yulu": "#0077c7", "loca": "#4f0fd1", "vogo": "#
 
 # Deserializer for the pickle file stored in BlobContainer
 def read_vantage_pts_from_blob_container():
-	blob_client = azure.storage.blob.BlobClient.from_connection_string(conn_str="DefaultEndpointsProtocol=https;AccountName=mobilityhack;AccountKey=TBq6mUKB1uT7SIBWxSbgSUPLKPjdlddLeNI/oLQRqHuEbdpRwXrV5IYbn+CFpOC65Dj67C8iRNwgSfU7ej6B5w==;EndpointSuffix=core.windows.net", container_name="vantage-pts-container", blob_name="vantage_pts_blob.pickle")
+	blob_client = azure.storage.blob.BlobClient.from_connection_string(conn_str="my_conn_str", container_name="vantage-pts-container", blob_name="vantage_pts_blob.pickle")
 	blob_data = blob_client.download_blob()
 	return pickle.loads( blob_data.readall() )
 
@@ -80,7 +80,7 @@ def process_location( latitude, longitude ):
 def show_regions():
 	global mongo_client
 	if mongo_client is None:
-		mongo_client = pymongo.MongoClient("mongodb://mobility-vantage-pt-region:dW9VlngM8nxNiSdXy39KyUzkzuYFXYz9pMGkwLdzpSeZKm92PPkkZcdY83kBqUsb7g9robY4uXyP8Vs0EjPmqQ==@mobility-vantage-pt-region.mongo.cosmos.azure.com:10255/?retrywrites=false&ssl=true&replicaSet=globaldb&maxIdleTimeMS=120000&appName=@mobility-vantage-pt-region@")
+		mongo_client = pymongo.MongoClient("my_mongo_uri")
 	db = mongo_client.mobility_radar
 	regions = list( map( set_region_color_code , db.regions.find() ) )
 	

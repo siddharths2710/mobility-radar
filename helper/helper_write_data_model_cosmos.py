@@ -85,7 +85,7 @@ vantage_pts = \
 }
 
 if __name__ == "__main__":
-	client = pymongo.MongoClient("mongodb://mobility-vantage-pt-region:dW9VlngM8nxNiSdXy39KyUzkzuYFXYz9pMGkwLdzpSeZKm92PPkkZcdY83kBqUsb7g9robY4uXyP8Vs0EjPmqQ==@mobility-vantage-pt-region.mongo.cosmos.azure.com:10255/?retrywrites=false&ssl=true&replicaSet=globaldb&maxIdleTimeMS=120000&appName=@mobility-vantage-pt-region@")
+	client = pymongo.MongoClient("my_mongo_client")
 	db = client.mobility_radar
 	for service in vantage_pts:
 		regions = vantage_pts[ service ]["regions"]
