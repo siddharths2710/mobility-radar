@@ -2,6 +2,12 @@
 
 This repository provides the source files to run the mobility-radar solution, with the intention of deploying the server code onto Azure Serverless based Python App Service. The below UML diagram describes the basic workflow between Azure components and the client.
 
+The ideation is attributed to being shortlisted as a semi-finalist in the Microsoft Azure Hackathon 2020.
+
+**Team Name:** GreenCorridor
+
+**URI**: [Microsoft Azure Hackathon 2020](https://www.hackerearth.com/challenges/hackathon/microsoft-azure-java-hackathon)
+
 ## Use Case Diagram
 
 <img src="https://i.imgur.com/FfHcjle.png" width="800px"/>
