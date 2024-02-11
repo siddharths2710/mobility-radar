@@ -10,3 +10,4 @@ pickle5>=0.0.10
 azure-storage-blob>=12.3.1
 geopy>=1.22.0
 pymongo>=3.10.1
+dnspython>=2.6.0rc1 # not directly required, pinned by Snyk to avoid a vulnerability
